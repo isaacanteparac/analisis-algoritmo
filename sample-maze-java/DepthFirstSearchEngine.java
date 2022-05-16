@@ -15,7 +15,7 @@ public class DepthFirstSearchEngine extends AbstractSearchEngine {
         iterateSearch(startLoc, 1);
     }
 
-    private void iterateSearch(Dimension loc, int depth) {
+    public void iterateSearch(Dimension loc, int depth) {
         if (isSearching == false) return;
         maze.setValue(loc.width, loc.height, (short)depth);
         Dimension [] moves = getPossibleMoves(loc);
