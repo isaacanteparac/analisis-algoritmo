@@ -15,7 +15,7 @@ public class DepthFirstSearchEngine extends AbstractSearchEngine {
         iterateSearch(startLoc, 1);
     }
 
-    public void iterateSearch(Dimension loc, int depth) {
+    private void iterateSearch(Dimension loc, int depth) {
         if (isSearching == false) return;
         maze.setValue(loc.width, loc.height, (short)depth);
         Dimension [] moves = getPossibleMoves(loc);
@@ -35,4 +35,13 @@ public class DepthFirstSearchEngine extends AbstractSearchEngine {
         }
         return;
     }
+
+    public Dimension [] getPath() {
+        Dimension [] ret = new Dimension[maxDepth];
+        for (int i=0; i<maxDepth; i++) {
+          ret[i] = searchPath[i];
+        }
+        return ret;
+      }
+   
 }

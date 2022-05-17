@@ -102,4 +102,5 @@ public class Maze {
     synchronized public void setValue(int x, int y, short value) { maze[x+1][y+1] = value; }
     public int getWidth() { return width; }
     public int getHeight() { return height; }
+
 }
