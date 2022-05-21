@@ -1,33 +1,53 @@
 import math
+import time
+#import matplotlib.pyplot as plt
+#import numpy as np
 
-def ejercicio1(n):
-    for i in range(n, n*1):
-        print(f"\nHey - I'm busy looking at: {i}")
-        #constante o(c)
 
-def ejercicio2(n):
-    print()
+def oc(n:int):
+    inicio = time.time()
+    for i in range(n,(n * 2)):
+        print(f"\n eje_1: {i}")
+    fin = time.time()
+    total = fin-inicio
+    return total
+
+
+def ejercicio2(n:int):
+    inicio = time.time()
     for i in range(n):
-        print(f"\nHey - I'm busy looking at: {i}")
-        
+        print(f"\neje_2: {i}")
+    fin = time.time()
+    total = fin-inicio
+    return total
 
 
-def ejercicio3(n):
-    print("o(2n)")
+def on2(n:int):
+    inicio = time.time()
     for i in range(1, n):
-      for j in range(n):
-        print(f"\nHey - I'm busy looking at: i={i} and  j={j}")
+        for j in range(n):
+            print(f"\neje_3: i={i}  and  j={j}")
+    fin = time.time()
+    total = fin-inicio
+    return total
 
 
-def ejercicio4(n):
-    m = math.pow(2, n)
+def o2n(n:int):
+    m = int(math.pow(2, n))
+    inicio = time.time()
     for i in range(m):
-        print(f"\nHey - I'm busy looking at: {i}")
+        print(f"\neje_4: {i}")
+    fin = time.time()
+    total = fin-inicio
+    return total
+
+
 
 def main():
     n = 1000
-    print(f"\nHey - your input is: {n}")
-    ejercicio3(n)
+    #print(f"tiempo eje_1 {oc(n)}")
+    print(f"tiempo eje_3 {on2(n)}")
+    #print(f"tiempo eje_4 {o2n(n)}")
 
 
 main()
