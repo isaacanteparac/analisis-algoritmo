@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class AstarEngine extends AbstractSearchEngine {
@@ -8,8 +9,13 @@ public class AstarEngine extends AbstractSearchEngine {
     int h = 0; // heuristica(estimacion de lo que queda)
     private int escenario[][] = new int[20][1];// nodos a ser explorados
 
-    Stack noExplorar = new Stack();// nodos a ser explorados
-    List<String> yesExplordo = new ArrayList<String>();// nodos explorados
+
+    int openList[][] = new int[20][1];
+    int closeList[][] = new int[20][1];
+    int camino[][] = new int[20][1];
+    boolean terminado = false;
+    int ganador; //posicion dentro del array
+
 
     public AstarEngine(int width, int height) {
         super(width, height);
@@ -87,6 +93,23 @@ public class AstarEngine extends AbstractSearchEngine {
        
     }
 
+
+    public void algoritmoAStar(){
+        if(terminado != true){
+            if(openList.length > 0){
+                ganador = 0;
+            }
+            for(int i = 0; i < openList.length; i++){
+                if(openList[i][f] < openList[ganador][f]){
+                    ganador = i;
+                }
+            }
+
+            ArrayList<ArrayList<Integer>> actual = new ArrayList<ArrayList<Integer>>();;
+            actual.add(openList[ganador]);
+
+        }
+    };
     public static void main(String[] args) {
         int escenario[][] = new int[20][2];// nodos a ser explorados
     
