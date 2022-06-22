@@ -30,9 +30,13 @@ public class Maze {
         }
         for (int i=0; i<height+2; i++) {
             maze[0][i] = maze[width+1][i] = OBSTICLE;
+            System.out.println(maze[0][i]);
         }
         for (int i=0; i<width+2; i++) {
             maze[i][0] = maze[i][height+1] = OBSTICLE;
+            System.out.println("--------");
+            System.out.println(maze[i][0]);
+
         }
         /**
          * Randomize the maze by putting up arbitray obsticals

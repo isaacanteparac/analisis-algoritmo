@@ -3,6 +3,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class AstarEngine extends AbstractSearchEngine {
+    
 
     int f = 0; // coste total
     int g = 0; // pasos dados
@@ -20,6 +21,7 @@ public class AstarEngine extends AbstractSearchEngine {
     public AstarEngine(int width, int height) {
         super(width, height);
         iterateSearch(startLoc, 1);
+        System.out.println(width);
     }
 
     private void iterateSearch(Dimension loc, int depth) {
@@ -73,7 +75,7 @@ public class AstarEngine extends AbstractSearchEngine {
                     int derecha = x+1; 
                     this.escenario[o][0] = y;
                     this.escenario[o][1] = derecha;
-                    this,noExplorar.push(escenario[o]);
+                    this.noExplorar.push(escenario[o]);
                 }
                 else if(y > 0){
                     int arriba = y-1;

@@ -1,12 +1,5 @@
 
 
-
-
-
-
-
-
-
 -----------------------EXAMEN-----------------
 hacer una demostracion y explicacion
 
@@ -26,14 +19,6 @@ algoritmo de busquedad informada
 			+O(n2)
 			+o(2n)
 			-tecnica de conteo en codigo para BIG O(alculo de big o)
-
--------------------------------------------------------------------------------
-complejidad de tiempo de BFS ++++DEBER
-proyecto de curso DOMINGO
-incorporar el codigo A* 22 MIERCOLES
-	tiempo en q tarda en ejecutarse BIG o Y LA RUTA PARA HACER UNA COMPARACION DE DFS Y A*
-
-
 -------------------
 CONTEO Y DETERMINACION EN SI EL EJERCICIO X Q DA ESE RESULTADO
 
@@ -42,6 +27,31 @@ A*
 
 
 
+------------------------------------------DEBER-------------------------------------
+complejidad de tiempo de BFS
+proyecto de curso DOMINGO 19
+incorporar el codigo A* 22 MIERCOLES
+	tiempo en q tarda en ejecutarse BIG o Y LA RUTA PARA HACER UNA COMPARACION DE DFS Y A*
+
+
+
+
+
+////////////////////////A* IMPLEME deber////////////////////////////
+
+priori cola
+	openlist
+	closelist
+
+crear clase NODO
+	G
+	H
+	f
+	PADRE
+	+METODOS
+		HEURISTICA
+			
+	
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
