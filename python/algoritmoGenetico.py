@@ -1,40 +1,40 @@
 
-from asyncio.windows_events import NULL
-from operator import le
 import random
 
-box = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-       [0, 7, 0, 0, 4, 0, 0, 0, 0, 3, 0],
-       [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ]
+box = [[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 7, 0, 0, 4, 0, 0, 0, 0, 3, 0, 8],
+       [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], ]
 
 nchromosomes = [[], [], [], [], [], []]
 
-boxPosition = 3
-insideBox = 1
+boxPosition = 4
+insideBox = 2
 
 
 def compass(n):
     if(n == 1):
-        return "N"
+        return "N"  # arriba
     elif (n == 2):
-        return "S"
+        return "S"  # abajo
     elif (n == 3):
-        return "E"
+        return "E"  # derecha
     elif (n == 4):
-        return "O"
+        return "O"  # izquierda
     elif (n == 5):
-        return "NE"
+        return "NE"  # ARRIBA DERECHA
     elif (n == 6):
-        return "NO"
+        return "NO"  # ARRIBA IZQUIERDA
     elif (n == 7):
-        return "SE"
+        return "SE"  # ABAJO DERECHA
     elif (n == 8):
-        return "SO"
+        return "SO"  # ABAJO IZQUIERDA
     else:
         return "ERROR"
 
@@ -49,7 +49,6 @@ def randomGenerator(n):
         else:
             numberValue = [numberR, 15, orientation, NULL]
         nchromosomes[n].append(numberValue)
-    think(n)
 
 
 def chromosomeGenerator():
@@ -62,22 +61,22 @@ def chromosomeGenerator():
             print(f"{nchromosomes[c][p]}")
 
 
-def think(subArray):
+def think(array_):
     global nchromosomes, boxPosition, insideBox
-    for p in range(len(nchromosomes[subArray])):
-        orientation = nchromosomes[subArray][p][2]
-        walking(boxPosition, insideBox, orientation, subArray, p)
-    boxGet()
-   
+    for i in range(len(array_)):
+        for p in range(len(array_[i])):
+            orientation = nchromosomes[i][p][2]
+            walking(orientation, i, p)
+        boxGet()
 
 
-def walking(boxPosition, insideBox, orientation, subChromosome, position):
-    global box, nchromosomes
+def walking(orientation, subChromosome, position):
+    global box, nchromosomes, boxPosition, insideBox
     if(orientation == "N"):
         boxPosition -= 1
         box[boxPosition][insideBox] += 1
         print(f"{orientation} box{boxPosition}:{insideBox}")
-        nchromosomes[subChromosome][position][3] += 1
+        nchromosomes[subChromosome][position][3] += box[boxPosition][insideBox]
     elif(orientation == "S"):
         boxPosition += 1
         box[boxPosition][insideBox] += 1
@@ -124,18 +123,19 @@ def boxGet():
     for i in range(len(box)):
         print(f"{box[i]}")
     box = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-       [0, 7, 0, 0, 4, 0, 0, 0, 0, 3, 0],
-       [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ]
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
+           [0, 7, 0, 0, 4, 0, 0, 0, 0, 3, 0],
+           [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ]
 
 
 def main():
-    print("\nGITHUB @isaacanteparac\n")
+    global nchromosomes
     chromosomeGenerator()
+    think(nchromosomes)
 
 
 main()
