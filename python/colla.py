@@ -1,4 +1,4 @@
-#!pip install deap
+!pip install deap
 
 
 import warnings
@@ -12,7 +12,7 @@ box = [[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
        [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
        [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
        [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
-       [8, 0, 7, 0, 0, 4, 0, 0, 0, 0, 10, 0, 8],
+       [8, 0, 7, 0, 0, 4, 0, 0, 0, 0, 9, 0, 8],
        [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
        [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
        [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
@@ -38,106 +38,144 @@ toolbox.register("attr_bool", random.randint, 1, 8)
 
 #ESCTRUCTURA DE INICIALIZADOR
 toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_bool, INDIVIDUAL_SIZE)
-toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+toolbox.register("population_", tools.initRepeat, list, toolbox.individual)
 
 #ARRAY POBLACION
-population = toolbox.population(POPULATION)
+individual_ = toolbox.individual()
+population = toolbox.population_(POPULATION)
 
 def compass():
     global population
-    for popul in range(len(population)):
-      n = population[popul]
-      if(n == 1):
-          population[popul] = [n, "n"]#arriba
-      elif(n == 2):
-          population[popul] = [n, "s"]#abajo
-      elif (n == 3):
-          population[popul] = [n, "e"]#derecha
-      elif (n == 4):
-          population[popul] = [n, "o"]#izquierda
-      elif (n == 5):
-          population[popul] = [n, "ne"]# ARRIBA DERECHA
-      elif (n == 6):
-          population[popul] = [n, "no"]  # ARRIBA IZQUIERDA
-      elif (n == 7):
-          population[popul] = [n, "se"]  # ABAJO DERECHA
-      elif (n == 8):
-          population[popul] = [n, "so"]  # ABAJO IZQUIERDA
+    print(population)
+    for ind in range(len(population)):
+      for number in range(len(population[ind])):
+        n = population[ind][1.2]
+        print(n)
+        if(n == 1):
+            #print(individual_)
+            population[ind] = [n, "n"]#arriba
+        elif(n == 2):
+            population[ind] = [n, "s"]#abajo
+        elif (n == 3):
+            population[ind] = [n, "e"]#derecha
+        elif (n == 4):
+            population[ind] = [n, "o"]#izquierda
+        elif (n == 5):
+            population[ind] = [n, "ne"]# ARRIBA DERECHA
+        elif (n == 6):
+            population[ind] = [n, "no"]  # ARRIBA IZQUIERDA
+        elif (n == 7):
+            population[ind] = [n, "se"]  # ABAJO DERECHA
+        elif (n == 8):
+            population[ind] = [n, "so"]  # ABAJO IZQUIERDA
+    print(population)
+
 
 def cropped(bPosition, insideB):
     global box
-    position = box[bPosition][insideB]
-    if(position == 8 or position == 4):
-      return False
-    elif(position >= 2):
-      return False
-    elif(position == 10):
-      return True
+    print(f"bposition{bPosition}, insideB{insideB}")
+    if(bPosition >= 0 and bPosition <= 9 or insideB >= 0 and insideB <= 13):
+      position = box[bPosition][insideB]
+      print(f"{position}")
+      if(position == 9 or position == 4):
+        return False
+      elif(position >= 2):
+        return False
+      elif(position == 10):
+        return True
+      else:
+        return True
     else:
-      return True
+      return False
 
 def think():
     global population, boxPosition, insideBox
-    for popul in range(len(population)):
-        print(population[popul])
-        for ind in range(len(population[popul])):
-            orientation = "n"
+    for ind in range(len(population)):
+        print(population[ind])
+        for indexArr in range(len(population[ind])):
+            orientation = population[ind][indexArr]
             walking(orientation)
-        #boxGet()
+        boxGet()
 
 
 def walking(orientation):
     global box, boxPosition, insideBox
+    print(orientation)
     if(orientation == "n"):
-        boxPosition -= 1
-        #if()
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((boxPosition-1) >= 0):
+          boxPosition -= 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] += 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
+
+
     elif(orientation == "s"):
-        boxPosition += 1
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((boxPosition+1) <= 9):
+          boxPosition += 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] += 1
+            print(f"S{orientation} box{boxPosition}:{insideBox}")
+  
     elif(orientation == "e"):
-        insideBox += 1
-        box[boxPosition][insideBox] = 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((insideBox+1) <=13 ):
+          insideBox += 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] = 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
+
+
     elif(orientation == "o"):
-        insideBox -= 1
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((insideBox-1) >=0 ):
+          insideBox -= 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] += 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
+    
     elif(orientation == "no"):
-        boxPosition -= 1
-        insideBox -= 1
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((boxPosition-1) >=0 and (insideBox-1) >=0 ):
+          boxPosition -= 1
+          insideBox -= 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] += 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
+
     elif(orientation == "ne"):
-        boxPosition -= 1
-        insideBox += 1
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((boxPosition-1) >=0 and (insideBox+1) <= 13 ):
+          boxPosition -= 1
+          insideBox += 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] += 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
     elif(orientation == "so"):
-        boxPosition += 1
-        insideBox -= 1
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((boxPosition+1) <=9 and (insideBox+1) <= 13 ):
+          boxPosition += 1
+          insideBox -= 1
+          if(cropped(boxPosition, insideBox)):    
+            box[boxPosition][insideBox] += 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
     elif(orientation == "se"):
-        boxPosition += 1
-        insideBox += 1
-        box[boxPosition][insideBox] += 1
-        print(f"{orientation} box{boxPosition}:{insideBox}")
+        if((boxPosition+1) <=9 and (insideBox+1) >= 0 ):
+          boxPosition += 1
+          insideBox += 1
+          if(cropped(boxPosition, insideBox)):
+            box[boxPosition][insideBox] += 1
+            print(f"{orientation} box{boxPosition}:{insideBox}")
 
 def boxGet():
     global box
     for i in range(len(box)):
-        print(f"{box[i]}")
-    box = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-           [0, 7, 0, 0, 4, 0, 0, 0, 0, 3, 0],
-           [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ]
+        print(f"{(i+1)}{box[i]}")
+    print("\n")
+    box = [[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 7, 0, 0, 4, 0, 0, 0, 0, 9, 0, 8],
+       [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+       [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], ]
   
 def main():
     compass()
