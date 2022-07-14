@@ -45,9 +45,9 @@ def randomGenerator(n):
         numberR = random.randint(1, 8)
         orientation = compass(numberR)
         if(numberR <= 4):
-            numberValue = [numberR, 10, orientation, NULL]
+            numberValue = [numberR, 10, orientation]
         else:
-            numberValue = [numberR, 15, orientation, NULL]
+            numberValue = [numberR, 15, orientation,]
         nchromosomes[n].append(numberValue)
 
 
