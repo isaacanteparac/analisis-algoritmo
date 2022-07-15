@@ -42,54 +42,40 @@ toolbox.register("population_", tools.initRepeat, list, toolbox.individual)
 
 #ARRAY POBLACION
 
-#individual_ = toolbox.individual()
-#population = toolbox.population_(POPULATION)
+individual_ = toolbox.individual()
+population = toolbox.population_(POPULATION)
 
-
-population = [[], [], [], [], [], []]
-
-
-def randomGenerator():
-    global population
-    for i in range(len(population)):
-      for k in range(10):
-        numberR = random.randint(1, 8)
-        population[i].append(numberR)
 
 
 def compass():
     global population
-    print(population)
     for ind in range(len(population)):
-      print(population[ind])
-      for nu in range(len(population[ind])):
-        n = population[ind][nu]
-        print(n)
-        if(n == 1):
-            #print(individual_)
-            population[ind] = [n, "n"]#arriba
-        elif(n == 2):
-            population[ind] = [n, "s"]#abajo
-        elif (n == 3):
-            population[ind] = [n, "e"]#derecha
-        elif (n == 4):
-            population[ind] = [n, "o"]#izquierda
-        elif (n == 5):
-            population[ind] = [n, "ne"]# ARRIBA DERECHA
-        elif (n == 6):
-            population[ind] = [n, "no"]  # ARRIBA IZQUIERDA
-        elif (n == 7):
-            population[ind] = [n, "se"]  # ABAJO DERECHA
-        elif (n == 8):
-            population[ind] = [n, "so"]  # ABAJO IZQUIERDA
+        for indexArr in range(len(population[ind])):
+            n = population[ind][indexArr]
+            if(n == 1):
+                #print(individual_)
+                population[ind][indexArr] = [n, "n"]#arriba
+            elif(n == 2):
+                population[ind][indexArr] = [n, "s"]#abajo
+            elif (n == 3):
+                population[ind][indexArr] = [n, "e"]#derecha
+            elif (n == 4):
+                population[ind][indexArr] = [n, "o"]#izquierda
+            elif (n == 5):
+                population[ind][indexArr] = [n, "ne"]# ARRIBA DERECHA
+            elif (n == 6):
+                population[ind][indexArr] = [n, "no"]  # ARRIBA IZQUIERDA
+            elif (n == 7):
+                population[ind][indexArr] = [n, "se"]  # ABAJO DERECHA
+            elif (n == 8):
+                population[ind][indexArr] = [n, "so"]  # ABAJO IZQUIERDA
     print(population)
 
 
 def cropped(bPosition, insideB):
     global box
-    print(f"bposition{bPosition}, insideB{insideB}")
+    print(f"bposition {bPosition}, insideB {insideB}")
     position = box[bPosition][insideB]
-    print(f"{position}")
     if(position == 8 or position == 4):
       return False
     elif(position >= 2):
@@ -103,9 +89,8 @@ def cropped(bPosition, insideB):
 def think():
     global population, boxPosition, insideBox
     for ind in range(len(population)):
-        print(population[ind])
         for indexArr in range(len(population[ind])):
-            orientation = population[ind][indexArr]
+            orientation = population[ind][indexArr][1]
             walking(orientation)
         boxGet()
 
@@ -183,8 +168,10 @@ def boxGet():
     
   
 def main():
-    randomGenerator()
+    #randomGenerator()
     compass()
+
     think()
 
+print(population)
 main()
