@@ -10,7 +10,6 @@ def div():
     global nDiv
     global newArray, array
     countElementArray = len(array)
-    print(countElementArray)
     for d in range(nDiv):
         newArray.append([])
     pair = countElementArray % 2
@@ -20,7 +19,7 @@ def div():
         addElement(countElementArray, opDiv)
     else:
         opDiv = int(opDiv)
-        print(opDiv)
+        print(f"impar {opDiv}")
         addElement(countElementArray, opDiv)
 
 
@@ -34,9 +33,10 @@ def addElement(countArray, nElementArray,):
             newArray[position].append(array[ca])
             count +=1
         else:
-            count = 0
             position +=1
             newArray[position].append(array[ca])
+            count = 0
+
 
 
 
