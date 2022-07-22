@@ -6,6 +6,8 @@ newArray = []
 nDiv = 0
 nPosition = 0
 nElement = 0
+subArray = 0
+div = 2
 
 
 def divN():
@@ -18,33 +20,22 @@ def divN():
 
 
 def divTwo():
-    global newArray, nDiv, nPosition, nElement
-    newArray.append([])
+    global newArray, nDiv, nPosition, nElement, subArray, div
     countElement = len(newArray[nPosition])
-    #pair = countElement%2
-    print(f"positon de NEW ARRAY = {nPosition}")
+    if (subArray > div or subArray == 0):
+        newArray.append([])
+        subArray = 1
+
     if (nElement == countElement):
-        print(countElement)
         nPosition +=1
         print(f"positon de NEW ARRAY = {nPosition}")
-    else:
-        #if ( pair == 0):
-        div = countElement/2
-        div = int(div)
-        if(nPosition <= nDiv):
-            addElement(3, -1, newArray[nPosition], nElement, (nElement+1))
+        nElement = 0
+
+    if(nPosition <= nDiv):
+        addElement(div, -1, newArray[nPosition], nElement, (nElement+1))
         nElement += 1
-                
-        """else:
-            print("impar")
-            div = countElement/3
-            div = (int(div)+1)
-            print(div)
-            if(nPosition <= nDiv):
-                addElement(4, -1, newArray[nPosition], nElement, (nElement+1))"""
-        
+        subArray +=1
         divTwo()
-       
 
     
 
@@ -53,6 +44,7 @@ def addElement(nElementArray, startPosition, arrays, forStart, forEnd):
     position = startPosition
     count = 0
     for ca in range(forStart, forEnd):
+        print(arrays[ca])
         if(count < nElementArray):
             newArray[position].append(arrays[ca])
             count +=1
@@ -83,6 +75,7 @@ def main():
     print(newArray)
     divTwo()
     print(newArray)
+
 
     
 

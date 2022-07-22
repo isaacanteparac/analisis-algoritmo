@@ -4,7 +4,7 @@ import time
 
 array_ = []
 
-def quicksort_(array):
+def selectSort(array):
     mini = 0
     timeStart = time.time()
     for i in range((len(array)-2)):
@@ -30,7 +30,7 @@ def main():
     nElement = int(input("numero de elementos: "))
     aR = random_(nElement, 1, 100000000) 
     print(f"ARRAY DE NUMEROS RANDOMS\n{aR}")
-    qS = quicksort_(array_)
+    qS = selectSort(array_)
     print(f"TIEMPO\n{qS}")
 
 
