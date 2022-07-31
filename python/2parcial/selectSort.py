@@ -7,7 +7,7 @@ array_ = []
 def selectSort(array):
     mini = 0
     timeStart = time.time()
-    for i in range((len(array)-2)):
+    for i in range((len(array)-1)):
         mini = i
         for j in range(i+1, len(array)):
             if(array[j] < array[mini]):

@@ -16,35 +16,36 @@ def divN():
     for d in range(nDiv):
         newArray.append([])
     opDiv = countElementArray/nDiv
-    addElement(opDiv, 0, array, 0, countElementArray)
+    addElement(opDiv, 0, array, countElementArray)
 
 
 def divTwo():
     global newArray, nDiv, nPosition, nElement, subArray, div
-    countElement = len(newArray[nPosition])
-    if (subArray > div or subArray == 0):
-        newArray.append([])
-        subArray = 1
+    for i in range(len(newArray)):
+        countElement = len(newArray[i])
+        if (subArray > div or subArray == 0):
+            newArray.append([])
+            subArray = 1
+            nElement = 0
 
-    if (nElement == countElement):
-        nPosition +=1
-        print(f"positon de NEW ARRAY = {nPosition}")
-        nElement = 0
 
-    if(nPosition <= nDiv):
-        addElement(div, -1, newArray[nPosition], nElement, (nElement+1))
-        nElement += 1
-        subArray +=1
-        divTwo()
+        if (nElement == countElement):
+            #nPosition +=1
+            nElement = 0
+
+        if(i <= nDiv):
+            addElement(countElement, -1, newArray[i], countElement)
+            nElement += 1
+            subArray +=1
+            divTwo()
 
     
 
-def addElement(nElementArray, startPosition, arrays, forStart, forEnd):
+def addElement(nElementArray, startPosition, arrays, range_):
     global newArray
     position = startPosition
     count = 0
-    for ca in range(forStart, forEnd):
-        print(arrays[ca])
+    for ca in range(range_):
         if(count < nElementArray):
             newArray[position].append(arrays[ca])
             count +=1
