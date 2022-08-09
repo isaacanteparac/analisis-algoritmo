@@ -1,9 +1,6 @@
+from os import system
 
-
-from asyncio.windows_events import NULL
-
-
-rgb = ["red", "green", "blue"]
+rgb = []
 
 westernAustralia = rgb
 northernTerritory = rgb
@@ -14,34 +11,60 @@ victoria = rgb
 tasmania = rgb
 
 map_ = []
+name = ["westernAustralia",
+        "northernTerritory",
+        "southAustralia",
+        "queensland",
+        "newSouthWales",
+        "victoria",
+        "tasmania"]
+
+saveColors = [(0,1,2,0,1,0,2)]
+result = []
 
 
 def value():
-    global rgb, map_
+    global map_, rgb
+    rgb = ["red", "green", "blue"]
     for i in range(7):
         map_.append(rgb)
-    return map_
 
 
 
 def tour():
-    global map_
+    global map_, result
     print(f"TOUR")
+    print(map_)
     for t in range(len(map_)):
-        print(f"{t} : {colors(1,t)}")
+        o = colors(saveColors[t],t)
+        print(f"{name[t]} : {o}\n")
+        map_[t] = o
+    print(map_)
+
+
 
 
 def colors(colorConst, element):
     global map_, rgb
     for i in range(len(map_[element])):
         if(i != colorConst):
+            print(i, rgb[i])
             map_[element][i] = None
         else:
-            continue
+            map_[element][i] = rgb[i]
+        
     return map_[element]
 
+
+def compare(numberColor):
+    global saveColor
+    if numberColor != {saveColors[0]}:
+        print("hola")
+
 def main():
+    system("cls")
     value()
     tour()
+
 
 main()
