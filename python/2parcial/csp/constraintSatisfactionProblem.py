@@ -1,3 +1,7 @@
+#!pip install csp
+#!pip install python-constraint 
+#!pip install typing
+
 from csp import Constraint, CSP
 from typing import Dict, List, Optional
 
